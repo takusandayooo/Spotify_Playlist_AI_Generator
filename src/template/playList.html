@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プレイリスト表示</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px 0;
+      background: linear-gradient(to right, #e0f7e0, #b9f5cc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #f0fff0;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      background-color: #d0f5d0;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .song-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .song-info span {
+      font-weight: bold;
+      color: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>プレイリスト表示</h1>
+    <ul id="playlist">
+    </ul>
+  </div>
+  <script>
+    const playlist = JSON.parse(localStorage.getItem('playlistData')) || [];
+    const playlistContainer = document.getElementById('playlist');
+
+    if (playlist.length === 0) {
+      playlistContainer.innerHTML = '<li>プレイリストが空です。</li>';
+    } else {
+      playlist.forEach(({ name, artists }) => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <div class="song-info">
+            <span>曲名:</span> ${name}
+            <span>アーティスト:</span> ${artists}
+          </div>
+        `;
+        playlistContainer.appendChild(listItem);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify AI プレイリスト ジェネレーター</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --spotify-green: #1db954;
+      --spotify-dark-green: #14833b;
+      --background-light: #f4f4f4;
+      --text-dark: #282828;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f7e0, #f4f4f4);
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 90%;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--spotify-green), var(--spotify-dark-green));
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .header i {
+      font-size: 2rem;
+      animation: spin 5s infinite linear;
+    }
+
+    .header h1 {
+      margin-top: 15px;
+      font-size: 1.8rem;
+    }
+
+    .form-group {
+      margin: 20px 0;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--spotify-dark-green);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--spotify-green);
+      box-shadow: 0 0 5px rgba(29, 185, 84, 0.5);
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: var(--spotify-green);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      background-color: var(--spotify-dark-green);
+    }
+
+    .btn i {
+      margin-left: 8px;
+      font-size: 1.2rem;
+    }
+
+    .btn:hover i {
+      animation: spin 1s infinite linear;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <i class="fas fa-music"></i>
+      <h1>あなたの今のおすすめプレイリスト作成AI</h1>
+    </div>
+    <div class="form-group">
+      <label for="now-mood">今の気分を入力してください</label>
+      <input type="text" id="now-mood" placeholder="例: リラックス, ハッピー">
+    </div>
+    <div class="form-group">
+      <label for="genre">どのようなジャンルが聞きたいですか？</label>
+      <input type="text" id="genre" placeholder="例: ポップ, ロック">
+    </div>
+    <div class="form-group">
+      <label for="comment">コメント (オプショナル)</label>
+      <input type="text" id="comment" placeholder="例: 特定のテーマや雰囲気">
+    </div>
+    <button class="btn" id="submit">
+      プレイリストを作成 <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+  <script>
+    const submit = document.getElementById('submit');
+    submit.addEventListener('click', () => {
+      const nowMood = document.getElementById('now-mood').value;
+      const genre = document.getElementById('genre').value;
+      const comment = document.getElementById('comment').value;
+
+      if (!nowMood || !genre) {
+        alert('今の気分とジャンルは必須です');
+        return;
+      }
+
+      fetch('/playlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nowMood: nowMood,
+          genre: genre,
+          comment: comment,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem('playlistData', JSON.stringify(data));
+          window.location.href = '/display_playlist';
+        })
+        .then((data) => {
+          console.log(data);
+        });
+    });
+  </script>
+</body>
+</html>
