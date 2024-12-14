@@ -24,7 +24,7 @@ export const createSpotifyQuery = async ({ nowMood, genre, comment }: WebSchema,
     let text = '';
     for await (const chunk of result.stream) {
         const chunkText = chunk.text();
-        console.log(chunkText);
+        // console.log(chunkText);
         text += chunkText;
     }
     return text;

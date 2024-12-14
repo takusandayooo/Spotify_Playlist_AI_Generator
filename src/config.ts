@@ -8,6 +8,5 @@ const EnvSchema = z.object({
 
 export const getEnvContent = () => {
   const env = require('dotenv').config().parsed;
-  console.log(env);
   return EnvSchema.parse(env);
 };

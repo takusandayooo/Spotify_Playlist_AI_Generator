@@ -42,7 +42,7 @@ app.listen(port, () => {
 const createPlayList = async (data: WebSchema,) => {
   const spotifyQuery = createSpotifyQuery(data, GEMINI_API_KEY);
   const apiResult = (await spotifyQuery).replace("json", "").replace("\n", "").replace("```", "").replace("```", "");
-  console.log(apiResult);
+  // console.log(apiResult);
 
   const jsonParse = MusicQuerySchema.parse(JSON.parse(apiResult));
   const createPlayListFromSpotify = createPlayListFromSpotifyAPI(jsonParse, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET);
