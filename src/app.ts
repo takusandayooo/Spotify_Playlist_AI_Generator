@@ -31,7 +31,7 @@ app.post("/playlist", (req, res) => {
   });
 });
 app.get("/display_playlist", (req, res) => {
-  res.sendFile(path.join(__dirname, "template", "playlist.html"));
+  res.sendFile(path.join(__dirname, "template", "playList.html"));
 });
 
 // サーバーを起動してリクエストを待ち受け状態にする
