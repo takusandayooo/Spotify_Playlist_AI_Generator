@@ -64,3 +64,6 @@ GoogleのGeminiAPIを利用するためにAPIキーが必要です。詳細な�
 6. ブラウザでアクセス
    開発サーバーが起動したら、以下にアクセスしてください：  
 👉 [http://localhost:3000](http://localhost:3000)
+以下のような画面が出たら成功です！！！
+<img width="300" alt="スクリーンショット 2024-12-15 16 37 17" src="https://github.com/user-attachments/assets/3c394b1d-4691-4c46-9c52-df5a048fcadd" />
+
