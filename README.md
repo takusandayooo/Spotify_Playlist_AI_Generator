@@ -35,7 +35,7 @@ GoogleのGeminiAPIを利用するためにAPIキーが必要です。詳細な�
 
 1. **このレポジトリをクローン**
    ```bash
-   git clone https://github.com/your-repo/spotify-ai.git
+   git clone https://github.com/takusandayooo/spotify_ai
    cd spotify-ai
    ```
 
