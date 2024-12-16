@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 app.use(bodyParser.json());
 app.post("/playlist", (req, res) => {
   const data = WebSchema.parse(req.body);
+  console.log(data);
   const result = createPlayList(data);
   result.then((playlist) => {
     res.json(playlist);
